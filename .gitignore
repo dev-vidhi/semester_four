@@ -1,0 +1,7 @@
+waste_env/
+frontend/node_modules/
+ml-model/dataset/
+ml-model/waste-classification-data.zip
+__pycache__/
+*.pyc
+.next/
