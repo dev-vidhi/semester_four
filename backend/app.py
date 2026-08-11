@@ -4,10 +4,11 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import io
+import os
+import gdown
 
 app = FastAPI()
 
-# Allow frontend to talk to backend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,12 +16,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load model
-#MODEL_PATH = r"D:\smart-waste-segregation\ml-model\waste_model.h5"
-MODEL_PATH = r"D:\main project\smart-waste-segregation\ml-model\waste_model.h5"
+# Download model from Google Drive if not exists
+MODEL_PATH = "waste_model.h5"
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model from Google Drive...")
+    gdown.download(
+        "https://drive.google.com/uc?id=1MvfK_mn1WEQhef0fhldRMlffy1Mq-SVr",
+        MODEL_PATH,
+        quiet=False
+    )
+    print("Model downloaded successfully!")
+
 model = tf.keras.models.load_model(MODEL_PATH)
 
-# Class labels
 CLASSES = {
     0: {
         "label": "Organic Waste",
