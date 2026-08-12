@@ -47,7 +47,8 @@ export default function Home() {
       const formData = new FormData();
       formData.append("file", file);
       // Ensure backend matches: res.json() must NOT contain 'emoji' key
-      const res = await fetch("http://127.0.0.1:8000/predict", {
+      //const res = await fetch("http://127.0.0.1:8000/predict", {
+      const res = await fetch("https://semesterfour-production.up.railway.app/predict", {
         method: "POST",
         body: formData,
       });
